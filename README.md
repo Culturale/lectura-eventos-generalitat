@@ -17,7 +17,7 @@ El parametro auth_token contiene un token de autentificación para poder realiza
 
 Enlace: https://analisi.transparenciacatalunya.cat/Cultura-oci/Agenda-cultural-de-Catalunya-per-localitzacions-/rhpv-yr4f  
 
-Ruta del archivo .csv: lectura-eventos-generalitat/files/Agenda_cultural_de_Catalunya__per_localitzacions_.csv  
+Ruta del archivo .csv: `lectura-eventos-generalitat/files/Agenda_cultural_de_Catalunya__per_localitzacions_.csv`  
 
 3. En una terminal situate sobre la raiz del proyecto y ejecuta `yarn`
 4. Sobre la raiz del proyecto ejecuta `yarn ts-node index.ts`
