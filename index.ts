@@ -10,6 +10,7 @@ const auth_token: string = process.env.auth_token as string;
 
 var eventos_posteados: number = 0;
 var eventos_fallidos: number = 0;
+var eventos_incompletos: number = 0;
 
 type EventGeneralitat = {
     codi: number;
@@ -181,9 +182,9 @@ async function postEvent(data: Event): Promise<void> {
             return parseFloat(columnValue);
         }
         return columnValue;
-    },/*
+    }/*,
     on_record: (line, context) => {
-        if (line.codi > 20210000000) {
+        if (line.codi !== 20201112024) {
             return;
         }   
         return line;
@@ -197,12 +198,15 @@ async function postEvent(data: Event): Promise<void> {
         for (var i = 0; i < result.length; i++) {
             console.log("Post nº: " + (i + 1));
             const event: Event = getEvent(result[i]);
-            await postEvent(event);
+            
+            if (event.lat !== undefined && event.long !== undefined && event.dataIni !== undefined && event.dataFi !== undefined && event.horari !== undefined && event.adress !== undefined && event.descripcio !== undefined) await postEvent(event);
+            else eventos_incompletos++;
         }
 
         console.log("Eventos totales: " + result.length);
         console.log("Se ha hecho POST de " + eventos_posteados + " evento(s)");
         console.log("Han fallado " + eventos_fallidos + " evento(s)");
+        console.log("Hay " + eventos_incompletos + " evento(s) a los que le faltan campos por rellenar");
     });
 })();
 
