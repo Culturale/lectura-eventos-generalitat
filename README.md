@@ -13,4 +13,5 @@ El parametro URI contiene la direccion donde se encuentra el servidor. En el cod
 
 El parametro auth_token contiene un token de autentificación para poder realizar las peticiones.
 
-2. En una terminal situate sobre la raiz del proyecto y ejecuta `yarn ts-node index.ts`
+2. En una terminal situate sobre la raiz del proyecto y ejecuta `yarn`
+3. Sobre la raiz del proyecto ejecuta `yarn ts-node index.ts`
