@@ -23,6 +23,6 @@ Ruta del archivo .csv: `lectura-eventos-generalitat/files/Agenda_cultural_de_Cat
 4. Sobre la raiz del proyecto ejecuta `yarn ts-node index.ts`
 
 
-## Para realizar una prueba:
+## Para realizar una prueba de getAllEventos:
 Al final del script hay una función para hacer un get de todos los eventos y la llamada a esa función.  
 Si se quiere usar esa funcionalidad solo habria que descomentar esa parte de codigo y comentar la que lee el csv para que no moleste.
