@@ -58,6 +58,7 @@ type Event = {
     price?: string;
     url?: string;
     photo?: string;
+    categoria?: string;
 }
 
 function formatDate(data: string): Date {
@@ -82,7 +83,8 @@ function getEvent(eventG: EventGeneralitat): Event {
         long: eventG.longitud,
         price: eventG.entrades,
         url: eventG.url,
-        photo: eventG.imatges
+        photo: eventG.imatges,
+        categoria: eventG.tags_categor_es
     };
 
     if (!e.descripcio) delete e.descripcio;
@@ -95,6 +97,7 @@ function getEvent(eventG: EventGeneralitat): Event {
     if (!e.price) delete e.price;
     if (!e.url) delete e.url;
     if (!e.photo) delete e.photo;
+    if (!e.categoria) delete e.categoria;
 
     return e;
 }
@@ -129,6 +132,24 @@ async function postEvent(data: Event): Promise<void> {
             console.log('unexpected error: ', error);
         }
     }
+}
+
+function categoriaValida(c: string): Boolean {
+    const categoriasPosibles: string[] = [
+        'agenda:categories/activitats-virtuals',
+        'agenda:categories/exposicions',
+        'agenda:categories/concerts',
+        'agenda:categories/teatre',
+        'agenda:categories/festivals-i-mostres',
+        'agenda:categories/rutes-i-visites',
+        'agenda:categories/infantil',
+        'agenda:categories/festes',
+        'agenda:categories/conferencies',
+        'agenda:categories/fires-i-mercats',
+        'agenda:categories/dansa',
+        'agenda:categories/cicles'
+    ];
+    return categoriasPosibles.includes(c);
 }
 
 
@@ -199,7 +220,10 @@ async function postEvent(data: Event): Promise<void> {
             console.log("Post nº: " + (i + 1));
             const event: Event = getEvent(result[i]);
             
-            if (event.lat !== undefined && event.long !== undefined && event.dataIni !== undefined && event.dataFi !== undefined && event.horari !== undefined && event.adress !== undefined && event.descripcio !== undefined) await postEvent(event);
+            if (event.lat !== undefined && event.long !== undefined && event.dataIni !== undefined &&
+                event.dataFi !== undefined && event.horari !== undefined && event.adress !== undefined &&
+                event.descripcio !== undefined && event.categoria !== undefined &&
+                categoriaValida(event.categoria)) await postEvent(event);
             else eventos_incompletos++;
         }
 
